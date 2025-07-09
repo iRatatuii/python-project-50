@@ -15,3 +15,6 @@ update:
 
 package-install:
 	uv tool install dist/*.whl
+
+test:
+	pytest
