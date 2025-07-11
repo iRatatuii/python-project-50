@@ -5,7 +5,7 @@ from gendiff.formatters import get_formatter
 from gendiff.parser import parse_file
 
 
-def generate_diff(data1, data2, formatter):
+def generate_diff(data1, data2, formatter='stylish'):
     diff_tree = build_diff_tree(data1, data2)
     formatter = get_formatter(formatter)
     return formatter(diff_tree)
