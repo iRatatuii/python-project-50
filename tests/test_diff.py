@@ -1,36 +1,39 @@
 import os
 
-from gendiff.scripts.gendiff import generate_diff, parse_file
+from gendiff.parser import parse_file
+from gendiff.scripts.gendiff import generate_diff
+
+
+def load_fixture(name):
+    path = os.path.join('tests', 'fixtures', name)
+    with open(path, 'r') as f:
+        return f.read().strip() 
+    
+    
+def test_generate_diff_json():
+    pass
 
 
 def test_generate_diff():
-    path1 = os.path.join("tests", "fixtures", "file1")
-    path2 = os.path.join("tests", "fixtures", "file2")
+    path1 = os.path.join("tests", "fixtures", "recursive1.json")
+    path2 = os.path.join("tests", "fixtures", "recursive2.json")
 
-    data1 = parse_file(path1, "json")
-    data2 = parse_file(path2, "json")
+    data1 = parse_file(path1)
+    data2 = parse_file(path2)
 
-    result = generate_diff(data1, data2)
-    # file1 = {
-    # "host": "hexlet.io",
-    # "timeout": 50,
-    # "proxy": "123.234.53.22",
-    # "follow": False
-    # }
+    result = generate_diff(data1, data2, formatter="stylish")
+    expected = load_fixture("expected_stylish.txt")
+  
+    assert result == expected
 
-    # file2 = {
-    # "timeout": 20,
-    # "verbose": True,
-    # "host": "hexlet.io"
-    # }
 
-    expected = """{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}"""
+def test_generate_diff_yaml():
+    file1 = "tests/fixtures/recursive1.yaml"
+    file2 = "tests/fixtures/recursive2.yaml"
+    
+    data1 = parse_file(file1)
+    data2 = parse_file(file2)
 
+    result = generate_diff(data1, data2, formatter="stylish")
+    expected = load_fixture("expected_stylish.txt")
     assert result == expected

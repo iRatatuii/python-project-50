@@ -1,13 +1,12 @@
 import os
-from typing import LiteralString
 
-from gendiff.scripts.gendiff import parse_file
+from gendiff.parser import parse_file
 
 
 def test_parse_json():
-    path = os.path.join("tests", "fixtures", "file1")
+    path = os.path.join("tests", "fixtures", "file1.json")
     print(path)
-    result = parse_file(path, "json")
+    result = parse_file(path)
 
     assert result == {
         "host": "hexlet.io",
@@ -18,6 +17,6 @@ def test_parse_json():
 
 
 def test_parse_yaml():
-    path: LiteralString = os.path.join("tests", "fixtures", "file2")
-    result = parse_file(path, "yaml")
+    path = os.path.join("tests", "fixtures", "file2.json")
+    result = parse_file(path)
     assert result == {"timeout": 20, "verbose": True, "host": "hexlet.io"}
