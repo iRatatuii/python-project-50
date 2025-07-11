@@ -6,12 +6,7 @@
 
 ## Hexlet tests and linter status
 
-[![Actions Status](https://github.com/iRatatuii/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/iRatatuii/python-project-50/actions)[![Python CI](https://github.com/iRatatuii/python-project-50/actions/workflows/pyci.yml/badge.svg)](https://github.com/iRatatuii/python-project-50/actions/workflows/pyci.yml)[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=iRatatuii_python-project-50&metric=bugs)](https://sonarcloud.io/summary/new_code?id=iRatatuii_python-project-50)[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=iRatatuii_python-project-50&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=iRatatuii_python-project-50)[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=iRatatuii_python-project-50&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=iRatatuii_python-project-50)[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=iRatatuii_python-project-50&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=iRatatuii_python-project-50)
-
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
-
-
+[![Actions Status](https://github.com/iRatatuii/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/iRatatuii/python-project-50/actions) [![Python CI](https://github.com/iRatatuii/python-project-50/actions/workflows/pyci.yml/badge.svg)](https://github.com/iRatatuii/python-project-50/actions/workflows/pyci.yml) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=iRatatuii_python-project-50&metric=bugs)](https://sonarcloud.io/summary/new_code?id=iRatatuii_python-project-50) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=iRatatuii_python-project-50&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=iRatatuii_python-project-50) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=iRatatuii_python-project-50&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=iRatatuii_python-project-50) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=iRatatuii_python-project-50&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=iRatatuii_python-project-50) [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
 
 ## 🛠 Клонирование репозитория
 
@@ -73,13 +68,13 @@ make package-install
 ## 🚀 Использование
 
 ```bash
-gendiff [OPTIONS] FILE1 FILE2
+gendiff FILE1 FILE2 [OPTIONS]
 ```
 
 ### Аргументы:
 
 - `FILE1`, `FILE2` — пути к конфигурационным файлам `.json`, `.yaml`, `.yml`
-- `-f`, `--format` — формат вывода (`stylish`, `plain`)
+- `-f`, `--format` — формат вывода (`stylish`, `plain`, `json`)
 
 ---
 
@@ -107,13 +102,42 @@ gendiff file1.json file2.json
 ### 📗 Формат `plain`:
 
 ```bash
-gendiff --format plain file1.json file2.json
+gendiff file1.json file2.json --format plain
 ```
 
 ```bash
 Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
 ...
+```
+---
+
+### 📗 Формат `json`:
+
+```bash
+gendiff file1.json file2.json --format json
+```
+
+```json
+[
+    {
+        "key": "common",
+        "type": "nested",
+        "children": [
+            {
+                "key": "follow",
+                "type": "added",
+                "value": false
+            },
+            {
+                "key": "setting1",
+                "type": "unchanged",
+                "value": "Value 1"
+            },
+            ...
+        ]
+    }
+]
 ```
 
 ---
@@ -125,6 +149,7 @@ Property 'common.setting2' was removed
 - Вывод в форматах:
   - `stylish`
   - `plain`
+  - `json`
 - Расширяемая архитектура
 
 ---
@@ -135,6 +160,8 @@ Property 'common.setting2' was removed
 make test
 ```
 
+[![asciicast](https://asciinema.org/a/727275.svg)](https://asciinema.org/a/727275)
+
 ---
 
 ## 🧼 Линтинг
@@ -142,6 +169,8 @@ make test
 ```bash
 make lint
 ```
+
+[![asciicast](https://asciinema.org/a/727277.svg)](https://asciinema.org/a/727277)
 
 ---
 
@@ -159,13 +188,23 @@ gendiff file1.json file2.json
 
 ---
 
-### Запуск сравнения с форматом plain 
+### Запуск сравнения с форматом plain
 
 ```bash
 gendiff file1.json file2.json --format plain
 ```
 
 [![asciicast](https://asciinema.org/a/727267.svg)](https://asciinema.org/a/727267)
+
+---
+
+### Запуск сравнения с форматом json
+
+```bash
+gendiff file1.json file2.json --format json
+```
+
+[![asciicast](https://asciinema.org/a/727274.svg)](https://asciinema.org/a/727274)
 
 ---
 
