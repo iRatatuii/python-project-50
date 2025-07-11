@@ -17,4 +17,4 @@ package-install:
 	uv tool install dist/*.whl
 
 test:
-	uv run pytest
+	uv run pytest -vv
