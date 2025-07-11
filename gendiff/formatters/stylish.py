@@ -10,7 +10,7 @@ def stringify(value, depth):
     return "{\n" + "\n".join(lines) + "\n" + " " * depth + "}"
 
 
-def format_stylish(diff_tree, depth=2, formatter='stylish'):
+def format_stylish(diff_tree, depth=2):
     lines = []
     indent = " " * depth
     for node in diff_tree:

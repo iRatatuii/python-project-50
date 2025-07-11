@@ -5,7 +5,7 @@ from gendiff.formatters import get_formatter
 from gendiff.parser import parse_file
 
 
-def generate_diff(data1, data2, formatter='stylish'):
+def generate_diff(data1, data2, formatter):
     diff_tree = build_diff_tree(data1, data2)
     formatter = get_formatter(formatter)
     return formatter(diff_tree)
@@ -22,7 +22,10 @@ def main():
     parser.add_argument("second_file", nargs="+")
 
     parser.add_argument(
-        "-f", "--format", nargs="?", help="set format of output"
+        "-f", "--format", 
+        nargs="?", 
+        default='stylish', 
+        help="set format of output"
     )
     args = parser.parse_args()
 
