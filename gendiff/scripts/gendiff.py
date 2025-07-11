@@ -5,7 +5,10 @@ from gendiff.formatters import get_formatter
 from gendiff.parser import parse_file
 
 
-def generate_diff(data1, data2, formatter='stylish'):
+def generate_diff(path1, path2, formatter='stylish'):
+    data1 = parse_file(path1)
+    data2 = parse_file(path2)
+    
     diff_tree = build_diff_tree(data1, data2)
     formatter = get_formatter(formatter)
     return formatter(diff_tree)
@@ -29,12 +32,9 @@ def main():
     )
     args = parser.parse_args()
 
-    file1 = args.first_file[0]
-    file2 = args.second_file[0]
+    path1 = args.first_file[0]
+    path2 = args.second_file[0]
     formatter = args.format
-
-    data1 = parse_file(file1)
-    data2 = parse_file(file2)
-
-    result = generate_diff(data1, data2, formatter)
+    
+    result = generate_diff(path1, path2, formatter)
     print(result)
