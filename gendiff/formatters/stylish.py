@@ -1,7 +1,11 @@
 
 def stringify(value, depth):
     if not isinstance(value, dict):
-        return "null" if value is None else str(value).lower()
+        if value is None:
+            return 'null'
+        if isinstance(value, bool):
+            return str(value).lower()
+        return str(value)
 
     indent = " " * (depth + 4)
     lines = []
@@ -20,7 +24,7 @@ def format_stylish(diff_tree, depth=2):
         match type_:
             case "added":
                 lines.append(
-                    f"{indent}+ {key}: {stringify(node['value'],
+                    f"{indent}+ {key}: {stringify(node['value'], 
                     depth + 2)}"
                 )
             case "removed":
